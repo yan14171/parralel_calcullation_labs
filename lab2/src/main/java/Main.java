@@ -3,8 +3,8 @@ import java.util.concurrent.*;
 import com.google.common.base.Stopwatch;
 
 public class Main {
-  static final int MATRIX_SIZE = 1000;
-  static final int[] THREADS_EXP = new int[] {16, 32, 64, 128, 256, 512};
+  static final int MATRIX_SIZE = 1500;
+  static final int[] THREADS_EXP = new int[] {12};
   static final int[] SIZES_EXP = new int[] {100, 1000, 1500};
 
   public static void main(String[] args){
@@ -20,33 +20,36 @@ public class Main {
     // 8 | 8 | 8)
 
     Stopwatch timer = Stopwatch.createStarted();
-    Result finalMatrix = multiply(multiplied, multiplicator, 3);
-
-    Main.print(finalMatrix.getResultMatrix());
-    System.out.print('\n');
-    System.out.print('\n');
-
-    Result r = new Result(multiplyF(multiplied, multiplicator, 3));
-
-    Main.print(r.getResultMatrix());
+    Result finalMatrix = multiply(multiplied, multiplicator, 12);
 
     System.out.println("Time for Striped Algorithm: " + timer.elapsed());
+    timer = Stopwatch.createStarted();
+
+    System.out.print('\n');
+    System.out.print('\n');
+
+    Result r = new Result(multiplyF(multiplied, multiplicator, 12));
+
+    System.out.println("Time for Fox Algorithm: " + timer.elapsed());
 
     generateRandomMatrix(multiplied);
     generateRandomMatrix(multiplicator);
 
     for (int threadNumber : THREADS_EXP) {
       timer = Stopwatch.createStarted();
-      multiply(multiplied, multiplicator, threadNumber);
+      for (int i = 0; i < 5; i++ )
+        multiply(multiplied, multiplicator, threadNumber);
 
-      System.out.println("Striped with " + threadNumber + " threads took " + timer.elapsed() + " ms");
+      System.out.println("Striped with " + threadNumber + " threads took " + timer.elapsed().toMillis()/5);
     }
 
-    for (int threadNumber : Arrays.stream(THREADS_EXP).limit(3).toArray()) {
-      timer = Stopwatch.createStarted();
-      multiplyF(multiplied, multiplicator, threadNumber);
+    for (int threadNumber : Arrays.stream(THREADS_EXP).toArray()) {
 
-      System.out.println("Fox with " + threadNumber + " threads took " + timer.elapsed() + " ms");
+      timer = Stopwatch.createStarted();
+      for (int i = 0; i < 5; i++ )
+        multiplyF(multiplied, multiplicator, threadNumber);
+
+      System.out.println("Fox with " + threadNumber + " threads took " + timer.elapsed().toMillis()/5);
     }
 
     System.out.println();

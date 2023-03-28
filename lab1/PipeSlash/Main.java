@@ -7,8 +7,8 @@ public class Main {
     Thread pipe = new Thread(new UnconctrolledPrinter("|"));
 
     slash.start();
-    pipe.start();
-*/
+    pipe.start();*/
+
     Control control = new Control();
     ControlledPrinter slash = new ControlledPrinter("-", control);
     ControlledPrinter pipe = new ControlledPrinter("|", control);
