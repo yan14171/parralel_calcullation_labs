@@ -15,6 +15,7 @@ public class Teacher implements Runnable {
           synchronized (group) {
 
             group.add((double) (Math.round(100 * Math.random() * 100)) / 100);
+            //group.add((double) (100));
 
           }
         }

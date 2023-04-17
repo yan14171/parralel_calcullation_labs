@@ -1,0 +1,2 @@
+This version includes four test cases for the Sort_IntArray_ReturnsSortedArray test, Programming testing various input array sizes and contents. It also includes four test cases for the Sort_IntArray_Performance test, testing the performance of the bubble sort algorithm on arrays of different sizes. The [Theory] attribute is used to generate multiple test cases for each test method, based on the different inputs specified in the [TestCase] attributes.
+And other Programming features

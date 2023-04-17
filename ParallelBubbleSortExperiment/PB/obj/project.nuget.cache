@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "6seZXfuwXfkET1sfUx8LzW95JMNg1qd9rIMNo31JLuaGxRb7j2SKEyqUnTmNS+Z0aeW2LTRtDP2tt8DJVGRn7A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\TPOlabs\\ParallelBubbleSortExperiment\\PB\\PB.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512"
+  ],
+  "logs": []
+}

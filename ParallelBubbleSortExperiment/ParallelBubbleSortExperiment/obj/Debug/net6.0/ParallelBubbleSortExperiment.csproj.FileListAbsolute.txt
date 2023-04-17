@@ -1,0 +1,12 @@
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\bin\Debug\net6.0\ParallelBubbleSortExperiment.deps.json
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\bin\Debug\net6.0\ParallelBubbleSortExperiment.dll
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\bin\Debug\net6.0\ParallelBubbleSortExperiment.pdb
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.AssemblyInfo.cs
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.dll
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\refint\ParallelBubbleSortExperiment.dll
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ParallelBubbleSortExperiment.pdb
+C:\Users\admin\Desktop\TPOlabs\ParallelBubbleSortExperiment\ParallelBubbleSortExperiment\obj\Debug\net6.0\ref\ParallelBubbleSortExperiment.dll
