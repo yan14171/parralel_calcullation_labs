@@ -7,82 +7,66 @@ using System.Threading.Tasks;
 
 namespace ParallelBubbleSortExperiment.Implementations;
 
-public class ParallelBubbleSort<T> : IBubble<T> where T : IComparable<T>
+public class ParallelBubbleSort : IBubble<int>
 {
-    public async Task<BasicSortResult<T>> Sort(IList<T> value)
+    public async Task<BasicSortResult<int>> Sort(IList<int> value)
     {
-        var arr = value.ToArray();
-
-        int numThreads = Math.Min(Environment.ProcessorCount, arr.Length);
-
-        // Divide the input array into numThreads pieces
-        int chunkSize = (int)Math.Ceiling(arr.Length / (double)numThreads);
-
+        List<int> lst = value.ToList();
+        int noThreads = Environment.ProcessorCount * 2;
+        int biggestItem = lst.Max();
+        int splitFactor = biggestItem/ noThreads;
         var sw = Stopwatch.StartNew();
-        Task[] tasks = new Task[numThreads];
-        for (int i = 0; i < numThreads; i++)
+
+        var lists = new List<List<int>>();
+        for (int i = 0; i < noThreads; i++)
         {
-            int startIndex = i * chunkSize;
-            int endIndex = Math.Min(startIndex + chunkSize, arr.Length);
-            tasks[i] = Task.Run(() => SortChunk(arr, startIndex, endIndex));
+            lists.Add(new List<int>());
         }
 
-        // Wait for all worker threads to finish
-        await Task.WhenAll(tasks);
-
-        // Merge the sorted pieces of the input array
-        for (int i = 0; i < numThreads - 1; i++)
+        for (int j = 1; j < lists.Count; j++)
         {
-            int leftStart = i * chunkSize;
-            int leftEnd = Math.Min(leftStart + chunkSize, arr.Length);
-            int rightStart = (i + 1) * chunkSize;
-            int rightEnd = Math.Min(rightStart + chunkSize, arr.Length);
-
-            T[] merged = new T[leftEnd - leftStart + rightEnd - rightStart];
-            int leftIndex = leftStart;
-            int rightIndex = rightStart;
-            int mergeIndex = 0;
-
-            while (leftIndex < leftEnd && rightIndex < rightEnd)
+            foreach (int i in lst.ToArray())
             {
-                if (arr[leftIndex].CompareTo(arr[rightIndex]) <= 0)
+                if (i <= (splitFactor * j))
                 {
-                    merged[mergeIndex++] = arr[leftIndex++];
-                }
-                else
-                {
-                    merged[mergeIndex++] = arr[rightIndex++];
+                    lists[j - 1].Add(i);
+                    lst.Remove(i);
                 }
             }
+        }
+        lists[lists.Count - 1].AddRange(lst);
 
-            while (leftIndex < leftEnd)
-            {
-                merged[mergeIndex++] = arr[leftIndex++];
-            }
+        var tasks = new List<Task>();
+        foreach (var list in lists)
+        {
+            var task = Task.Run(() => BubbleSort(list));
+            tasks.Add(task);
+        }
 
-            while (rightIndex < rightEnd)
-            {
-                merged[mergeIndex++] = arr[rightIndex++];
-            }
+        await Task.WhenAll(tasks.ToArray());
 
-            Array.Copy(merged, 0, arr, leftStart, merged.Length);
+        lst.Clear();
+        foreach (var list in lists)
+        {
+            lst.AddRange(list);
         }
         sw.Stop();
 
-        return new BasicSortResult<T>(null, arr, sw.Elapsed);
+        return new BasicSortResult<int>(null, lst, sw.Elapsed);
     }
 
-    private static void SortChunk<T>(T[] arr, int startIndex, int endIndex) where T : IComparable<T>
+    static void BubbleSort(List<int> lst)
     {
-        for (int i = startIndex; i < endIndex - 1; i++)
+        int n = lst.Count;
+        for (int i = 0; i < n; i++)
         {
-            for (int j = startIndex; j < endIndex - i - 1 + startIndex; j++)
+            for (int j = 0; j < n - 1; j++)
             {
-                if (arr[j].CompareTo(arr[j + 1]) > 0)
+                if (lst[j] > lst[j + 1])
                 {
-                    T temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    int temp = lst[j];
+                    lst[j] = lst[j + 1];
+                    lst[j + 1] = temp;
                 }
             }
         }

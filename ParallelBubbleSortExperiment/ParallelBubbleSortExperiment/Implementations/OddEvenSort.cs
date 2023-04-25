@@ -9,38 +9,57 @@ namespace ParallelBubbleSortExperiment.Implementations;
 
 public class OddEvenSort<T> : IBubble<T> where T : IComparable<T>
 {
-    public async Task<BasicSortResult<T>> Sort(IList<T> list)
+    public async Task<BasicSortResult<T>> Sort(IList<T> lst)
     {
         Stopwatch sw = Stopwatch.StartNew();
-        int n = list.Count;
-        bool sorted = false;
-        while (!sorted)
+        bool isOrdered;
+        do
         {
-            sorted = true;
-            // Odd phase
-            Parallel.For(1, n - 1, i =>
+            isOrdered = true;
+
+            List<Task> tasks = new List<Task>();
+
+            for (int j = 0; j < lst.Count / 2 - 1; j++)
             {
-                if (i % 2 == 1 && list[i].CompareTo(list[i + 1]) > 0)
+                int index = j;
+                Task task = Task.Run(() =>
                 {
-                    swap(list, i, i + 1);
-                    sorted = false;
-                }
-            });
-            // Even phase
-            Parallel.For(0, n - 1, i =>
+                    if (lst[2 * index + 1].CompareTo(lst[2 * index + 2]) > 0)
+                    {
+                        isOrdered = false;
+                        swap(lst, 2 * index + 1, 2 * index + 2);
+                    }
+                });
+                tasks.Add(task);
+            }
+
+            await Task.WhenAll(tasks);
+
+            tasks.Clear();
+
+            for (int k = 0; k < lst.Count / 2 - 1; k++)
             {
-                if (i % 2 == 0 && list[i].CompareTo(list[i + 1]) > 0)
+                int index = k;
+                Task task = Task.Run(() =>
                 {
-                    swap(list, i, i + 1);
-                    sorted = false;
-                }
-            });
-        }
+                    if (lst[2 * index].CompareTo(lst[2 * index + 1]) > 0)
+                    {
+                        isOrdered = false;
+                        swap(lst, 2 * index, 2 * index + 1);
+                    }
+                });
+                tasks.Add(task);
+            }
+
+            await Task.WhenAll(tasks);
+
+        } while (!isOrdered);
+
 
         sw.Stop();
-        return new BasicSortResult<T>(null, list, sw.Elapsed);
+        return new BasicSortResult<T>(null, lst, sw.Elapsed);
 
-        void swap<T>(IList<T> list, int i, int j)
+        void swap(IList<T> list, int i, int j)
         {
             T temp = list[i];
             list[i] = list[j];

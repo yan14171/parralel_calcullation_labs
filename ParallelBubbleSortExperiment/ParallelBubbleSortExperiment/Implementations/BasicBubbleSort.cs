@@ -29,7 +29,6 @@ namespace ParallelBubbleSortExperiment.Implementations
             }
 
             sw.Stop(); // Stop stopwatch
-            Console.WriteLine($"Bubble sort elapsed time: {sw.ElapsedMilliseconds} ms");
 
             return Task.FromResult(new BasicSortResult<T>(null, values, sw.Elapsed));
         }
