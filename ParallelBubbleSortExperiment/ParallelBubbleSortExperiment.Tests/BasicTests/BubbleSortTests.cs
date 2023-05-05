@@ -9,13 +9,14 @@ public class BubbleSortTests
     [SetUp]
     public void Setup()
     {
-        _bubble = new BasicBubbleSort<int>();
+        _bubble = new ParallelBubbleSort();
     }
 
     [Theory]
-    [TestCase(1000, TestName = "Sort_ArrayOf1000Elements_SortTime")]
-    [TestCase(10000, TestName = "Sort_ArrayOf10000Elements_SortTime")]
-    [TestCase(50000, TestName = "Sort_ArrayOf50000Elements_SortTime")]
+    [TestCase(10, TestName = "Sort_ArrayOf1000Elements_Correctness")]
+    [TestCase(1000, TestName = "Sort_ArrayOf1000Elements_Correctness")]
+    [TestCase(10000, TestName = "Sort_ArrayOf10000Elements_Correctness")]
+    [TestCase(50000, TestName = "Sort_ArrayOf50000Elements_Correctness")]
     public async Task Sort_IntArray_Correctness(int arraySize)
     { 
         var random = new Random();
@@ -37,15 +38,12 @@ public class BubbleSortTests
         int[] input;
         TimeSpan averageDuration = TimeSpan.Zero;
 
-        var stopwatch = new Stopwatch();
 
         for (int i = 0; i < repeatTimes; i++)
         {
-            stopwatch.Restart();
             input = Enumerable.Range(1, arraySize).Select(i => random.Next()).ToArray();
             var result = await _bubble.Sort(input);
-            stopwatch.Stop();
-            averageDuration += stopwatch.Elapsed;
+            averageDuration += result.Elapsed;
         }
 
         averageDuration /= repeatTimes;

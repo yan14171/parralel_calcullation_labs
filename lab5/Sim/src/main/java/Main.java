@@ -11,7 +11,7 @@ public class Main {
         List<Callable<double[]>> tasks;
 
 //        System.out.println("Single task results:");
-//        singleTask = new SMS(25);
+//        singleTask = new SMS(100);
 //        result = singleTask.call();
 //        System.out.println(result[0]);
 //        System.out.println(result[1]);

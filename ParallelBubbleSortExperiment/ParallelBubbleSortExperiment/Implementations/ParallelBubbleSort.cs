@@ -12,17 +12,16 @@ public class ParallelBubbleSort : IBubble<int>
     public async Task<BasicSortResult<int>> Sort(IList<int> value)
     {
         List<int> lst = value.ToList();
-        int noThreads = Environment.ProcessorCount * 2;
+        int noThreads = 2;
         int biggestItem = lst.Max();
         int splitFactor = biggestItem/ noThreads;
         var sw = Stopwatch.StartNew();
-
+        
         var lists = new List<List<int>>();
         for (int i = 0; i < noThreads; i++)
         {
             lists.Add(new List<int>());
         }
-
         for (int j = 1; j < lists.Count; j++)
         {
             foreach (int i in lst.ToArray())
