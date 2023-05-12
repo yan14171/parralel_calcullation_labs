@@ -9,7 +9,7 @@ public class BubbleSortTests
     [SetUp]
     public void Setup()
     {
-        _bubble = new ParallelBubbleSort();
+        _bubble = new BasicBubbleSort();
     }
 
     [Theory]

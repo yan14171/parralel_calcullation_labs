@@ -9,5 +9,6 @@ namespace ParallelBubbleSortExperiment
     public interface IBubble<T> where T : IComparable<T>
     {
         Task<BasicSortResult<T>> Sort(IList<T> values);
+        
     }
 }

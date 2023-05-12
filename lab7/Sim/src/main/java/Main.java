@@ -17,17 +17,6 @@ public class Main {
         double[] A = generateRandomMatrix(n, n, 10, 20);
         double[] B = generateRandomMatrix(n, n, 10, 20);
         double[] C = new double[n*n];
-
-//        CollectiveMultiply(rank, size, n, A, B, C);
-//        if(rank == 0)
-//        {
-//            System.out.println("Matrix A:");
-//            print(to2D(A, n, n));
-//            System.out.println("Matrix B:");
-//            print(to2D(B, n, n));
-//            System.out.println("Result:");
-//            print(to2D(C, n, n));
-//        }
         MPI.Finalize();
     }
     private static void SyncMultiply(int rank, int size, int n, double[] A, double[] B, double[] C) {
@@ -117,7 +106,6 @@ public class Main {
 
         MPI.COMM_WORLD.Gather(result, 0, rowsPerProcess * n, MPI.DOUBLE, c, 0, rowsPerProcess * n, MPI.DOUBLE, 0);
     }
-
 
     private static void print(double[][] m) {
         for(int i = 0; i < m.length; i++)

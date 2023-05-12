@@ -12,7 +12,7 @@ public class ParallelBubbleSort : IBubble<int>
     public async Task<BasicSortResult<int>> Sort(IList<int> value)
     {
         List<int> lst = value.ToList();
-        int noThreads = 2;
+        int noThreads = 12;
         int biggestItem = lst.Max();
         int splitFactor = biggestItem/ noThreads;
         var sw = Stopwatch.StartNew();
